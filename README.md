@@ -9,4 +9,4 @@ Repositorio para el seguimiento y control de versiones del proyecto a realizar e
 Realizado por Clara Rubio Almagro, Laura Sánchez Sánchez y Daniel Bazo Correa, estudiantes de Grado en Ingeniería de Sistemas Electrónicos de la Universidad de Málaga.
 
 ## ⭐️ Licencia
-[Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+[Attribution-NonCommercial 4.0 International (CC BY-NC-ND 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
