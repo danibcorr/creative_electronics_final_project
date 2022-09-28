@@ -7,3 +7,6 @@ Repository for monitoring and version control of the project to be done in the s
 
 ## 👤 Contributors
 Made by Clara Rubio Almagro, Laura Sánchez Sánchez and Daniel Bazo Correa, students of Electronic Systems Engineering at the University of Málaga.
+
+## ⭐️ License
+[Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
