@@ -1,5 +1,5 @@
 [README English](https://github.com/danibcorr/creative_electronics/blob/main/README_EN.md) / [README Spanish](https://github.com/danibcorr/creative_electronics/blob/main/README.md)
-# 🤖 Creative Electronics Project 
+# 🤖 Creative Electronics Final Project 
 
 ## 📄 Abstract
 This repository gathers all the documents and code necessary for the realization of the project of the Creative Electronics subject belonging to the University of Malaga (UMA). 
