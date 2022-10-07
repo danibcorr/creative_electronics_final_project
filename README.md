@@ -1,5 +1,5 @@
 [README inglés](https://github.com/danibcorr/creative_electronics/blob/main/README_EN.md) / [README español](https://github.com/danibcorr/creative_electronics/blob/main/README.md)
-# 🤖 Proyecto de Electrónica Creativa 
+# 🤖 Proyecto final de Electrónica Creativa 
 
 ## 📄 Resumen
 En este repositorio se reúnen todos los documentos y código necesario para la realización del proyecto de la asignatura de Electrónica Creativa perteneciente a la Universidad de Málaga (UMA). 
