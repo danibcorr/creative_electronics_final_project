@@ -8,5 +8,11 @@ Repositorio para el seguimiento y control de versiones del proyecto a realizar e
 ## 👤 Contribuyentes
 Realizado por Clara Rubio Almagro, Laura Sánchez Sánchez y Daniel Bazo Correa, estudiantes de Grado en Ingeniería de Sistemas Electrónicos de la Universidad de Málaga.
 
+## 🗺 Diagrama del código
+
+<p align="center">
+  <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Diagrams/Maquina_de_estados.jpg" width="500" />
+</p>
+
 ## ⭐️ Licencia
 [Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
