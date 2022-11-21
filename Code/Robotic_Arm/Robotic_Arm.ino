@@ -17,7 +17,7 @@
 
 // Pines Botones
 // Definir variables para los valores de los botones
-// Boton amarillo = manual
+// Boton amarillo = Manual
 // Boton azul = automático
 // Boton rojo = atrás
 // Boton verde = ejecutar los movimientos grabados
@@ -26,6 +26,7 @@
 #define BotonRojo 4
 #define BotonVerde 5
 
+int show_one[] = {0, 0, 0, 0, 0};
 
 
 
@@ -34,7 +35,9 @@
 String page;
 
 // Estados de pulsación
-bool cs[] = {false, false, false, false, false};
+bool estadoPulsador[] = {false, false, false, false};
+bool anteriorPulsador[] = {false, false, false, false};
+unsigned long db[4];
 
 // Numero de secuencia guardado
 int ssn = 0;
@@ -72,100 +75,122 @@ void setup()
   pinMode(j2x, INPUT);
   pinMode(j2y, INPUT);
 
-  pinMode(BotonAmarillo, INPUT);
-  pinMode(BotonAzul, INPUT);
-  pinMode(BotonRojo, INPUT);
-  pinMode(BotonVerde, INPUT);
+  pinMode(BotonAmarillo, INPUT_PULLUP);
+  pinMode(BotonAzul, INPUT_PULLUP);
+  pinMode(BotonRojo, INPUT_PULLUP);
+  pinMode(BotonVerde, INPUT_PULLUP);
 
   // Inicializaciamos la comunicación serie
   Serial.begin(9600);
   
   // Estado inicial
-  page = "home";
+  page = "Inicio";
 }
 
 void loop()
 {
-  if (page == "home")
+  if (page == "Inicio")
   {
+    if (show_one[0] == 0)
+    {
+      show_one[1] = show_one[2] = show_one[3] = show_one[4] = 0;
+      show_one[0] = 1;
+      Serial.println("Menu de inicio\n");
+    }
+    
     chooseModePage();
   }
-  else if (page == "manual")
+  else if (page == "Manual")
   {
-    manualModePage();
+    if (show_one[1] == 0)
+    {
+      show_one[0] = show_one[2] = show_one[3] = show_one[4] = 0;
+      show_one[1] = 1;
+      Serial.println("Modo Manual\n");
+    }
+    
+    ManualModePage();
   }
-  else if (page == "automated")
+  else if (page == "Automatico")
   {
-    automatedModePage();
+    if (show_one[2] == 0)
+    {
+      show_one[0] = show_one[1] = show_one[3] = show_one[4] = 0;
+      show_one[2] = 1;
+      Serial.println("Modo Automatico\n");
+    }
+    
+    AutomaticoModePage();
   }
-  else if (page == "record")
+  else if (page == "Grabar")
   {
-    recordPage();
+    if (show_one[3] == 0)
+    {
+      show_one[0] = show_one[1] = show_one[2] = show_one[4] = 0;
+      show_one[3] = 1;
+      Serial.println("Modo Grabar\n");
+    }
+    
+    GrabarPage();
   }
-  else if (page == "play")
+  else if (page == "Ejecutar")
   {
-    playPage();
+    if (show_one[4] == 0)
+    {
+      show_one[0] = show_one[1] = show_one[2] = show_one[3] = 0;
+      show_one[4] = 1;
+      Serial.println("Modo Ejecutar\n");
+    }
+    
+    EjecutarPage();
   }
 }
 
-void limpiar_estado_botones(int boton)
-{
-  for(int i = 0; i < sizeof(cs) / sizeof(bool); i++)
-  {
-    if(i != boton)
-    {
-      cs[i] = false;
-    }
-  }
-}
 
 void chooseModePage ()
 {
-  limpiar_estado_botones(0);
-
   ssn = 0;
 
-  if (cs[0] == false)
+  estadoPulsador[0] = digitalRead(BotonAmarillo);
+  if (!estadoPulsador[0] && anteriorPulsador[0] && millis() - db[0] >= 150UL)
   {
-    cs[0] = true;
-  }
+    Serial.println("Pulsado boton modo Manual");
+    page = "Manual";
+    db[0] = millis(); 
+  }      
+  anteriorPulsador[0] = estadoPulsador[0];
 
-  if (digitalRead(BotonAmarillo) == HIGH)
-  {
-    Serial.println("Pulsado boton modo manual");
-    page = "manual";
-  }        
-  if (digitalRead(BotonAzul) == HIGH)
+  estadoPulsador[1] = digitalRead(BotonAzul);
+  if (!estadoPulsador[1] && anteriorPulsador[1] && millis() -db[1] >= 150UL)
   {
     Serial.println("Pulsado boton modo automatico");
-    page = "automated";
+    page = "Automatico";
+    db[1] = millis();
   }
+  anteriorPulsador[1] = estadoPulsador[1];
 }
   
-void manualModePage()
+void ManualModePage()
 {
   // Mostramos los valores de los joystick por el puerto serie
   Serial.print(analogRead(j1x));
-  Serial.print("\t");
+  Serial.print("\r\t");
   Serial.print(analogRead(j2x));
-  Serial.print("\t");
+  Serial.print("\r\t");
   Serial.print(analogRead(j1y));
-  Serial.print("\t");
+  Serial.print("\r\t");
   Serial.println(analogRead(j2y));
 
-  limpiar_estado_botones(1);
   ssn = 0;
 
-  if (cs[1] == false)
+  estadoPulsador[2] = digitalRead(BotonRojo);
+  if (!estadoPulsador[2] && anteriorPulsador[2] && millis() -db[2] >= 150UL)
   {
-    cs[1] = true;
-  }
-
-  if (digitalRead(BotonRojo) == HIGH)
-  {
-    Serial.println("Pulsado boton atras, volvemos al menu");
-    page = "home";
+    Serial.println("Pulsado boton atras, volvemos al menu de inicio");
+    page = "Inicio";
+    db[2] = millis(); 
   }     
+  anteriorPulsador[2] = estadoPulsador[2];
 
   //-------------------------------Manual Joystick Control-------------------------------------------------------------------------------------------------------------
 
@@ -278,106 +303,112 @@ void manualModePage()
   }
 }
 
-void automatedModePage(){
-
-  limpiar_estado_botones(2);
+void AutomaticoModePage()
+{
   ssn = 0;
-
-  if (cs[2] == false)
-  {
-    cs[2] = true;
-  }  
-
-  // Delay de 20 ms, antirrebote
-  delay(20);
-  if (digitalRead(BotonAzul) == HIGH)
+    
+  estadoPulsador[1] = digitalRead(BotonAzul);
+  if (!estadoPulsador[1] && anteriorPulsador[1] && millis() -db[1] >= 150UL)
   {
     Serial.println("Pulsado boton de grabar movimientos");
-    page = "record";
-  }        
-  if (digitalRead(BotonVerde) == HIGH)
-  {
-    Serial.println("Pulsado boton de reproducir movimientos");
-    page = "play";
+    page = "Grabar";
+    db[1] = millis();
   }
-  if (digitalRead(BotonRojo) == HIGH)
+  anteriorPulsador[1] = estadoPulsador[1];
+       
+  estadoPulsador[2] = digitalRead(BotonRojo);
+  if (!estadoPulsador[2] && anteriorPulsador[2] && millis() -db[2] >= 150UL)
   {
     Serial.println("Pulsado boton atras, volvemos al menu");
-    page = "home";
+    page = "Inicio";
+    db[2] = millis();
   }
+  anteriorPulsador[2] = estadoPulsador[2];
+
+  estadoPulsador[3] = digitalRead(BotonVerde);
+  if (!estadoPulsador[3] && anteriorPulsador[3] && millis() -db[3] >= 150UL)
+  {
+    Serial.println("Pulsado boton de ejecutar los movimientos grabados");
+    page = "Ejecutar";
+    db[3] = millis();
+  }
+  anteriorPulsador[3] = estadoPulsador[3];
 }
 
-void recordPage()
+void GrabarPage()
 {
-  limpiar_estado_botones(3);
-
-  if (cs[3] == false)
-  {
-    cs[3] = true;
-  }
-
-  if (digitalRead(BotonAzul) == HIGH)
+  estadoPulsador[2] = digitalRead(BotonRojo);
+  if (!estadoPulsador[2] && anteriorPulsador[2] && millis() -db[2] >= 150UL)
   {
     Serial.println("Volvemos al menu automatico");
-    page = "automated";
-  }        
-  if (digitalRead(BotonVerde) == LOW)
-  {
-    switch(ssn)
-    {
-      case 0:
-      {
-        servo1PosSave[0] = s1.read();
-        servo2PosSave[0] = s2.read();
-        servo3PosSave[0] = s3.read();
-        servo4PosSave[0] = s4.read();
-      }
-      
-      break;
-      
-      case 1:
-      {
-        servo1PosSave[1] = s1.read();
-        servo2PosSave[1] = s2.read();
-        servo3PosSave[1] = s3.read();
-        servo4PosSave[1] = s4.read();
-      }
-      
-      break;
-      
-      case 2:
-      {
-        servo1PosSave[2] = s1.read();
-        servo2PosSave[2] = s2.read();
-        servo3PosSave[2] = s3.read();
-        servo4PosSave[2] = s4.read();
-      }
-      
-      break;
-      
-      case 3:
-      {
-        servo1PosSave[3] = s1.read();
-        servo2PosSave[3] = s2.read();
-        servo3PosSave[3] = s3.read();
-        servo4PosSave[3] = s4.read();
-      }
-      
-      break;
+    page = "Automatico";
+    db[2] = millis();
+  }
+  anteriorPulsador[2] = estadoPulsador[2];
 
-      case 4:
-      {
-        servo1PosSave[4] = s1.read();
-        servo2PosSave[4] = s2.read();
-        servo3PosSave[4] = s3.read();
-        servo4PosSave[4] = s4.read();
-      }
-      
-      break;
+  estadoPulsador[3] = digitalRead(BotonVerde);
+  if (!estadoPulsador[3] && anteriorPulsador[3] && millis() -db[3] >= 150UL)
+  {
+    Serial.println("Pulsado boton de ejecutar los movimientos grabados");
+    page = "Ejecutar";
+    db[3] = millis();
+  }
+  anteriorPulsador[3] = estadoPulsador[3];
+
+  switch(ssn)
+  {
+    case 0:
+    {
+      servo1PosSave[0] = s1.read();
+      servo2PosSave[0] = s2.read();
+      servo3PosSave[0] = s3.read();
+      servo4PosSave[0] = s4.read();
     }
     
-    ssn++;
+    break;
+    
+    case 1:
+    {
+      servo1PosSave[1] = s1.read();
+      servo2PosSave[1] = s2.read();
+      servo3PosSave[1] = s3.read();
+      servo4PosSave[1] = s4.read();
+    }
+    
+    break;
+    
+    case 2:
+    {
+      servo1PosSave[2] = s1.read();
+      servo2PosSave[2] = s2.read();
+      servo3PosSave[2] = s3.read();
+      servo4PosSave[2] = s4.read();
+    }
+    
+    break;
+    
+    case 3:
+    {
+      servo1PosSave[3] = s1.read();
+      servo2PosSave[3] = s2.read();
+      servo3PosSave[3] = s3.read();
+      servo4PosSave[3] = s4.read();
+    }
+    
+    break;
+
+    case 4:
+    {
+      servo1PosSave[4] = s1.read();
+      servo2PosSave[4] = s2.read();
+      servo3PosSave[4] = s3.read();
+      servo4PosSave[4] = s4.read();
+    }
+    
+    break;
   }
+    
+  ssn++;
 
   //-------------------------------Manual Joystick Control-------------------------------------------------------------------------------------------------------------
 
@@ -494,31 +525,40 @@ void recordPage()
   }
 }
 
-void playPage()
+void EjecutarPage()
 {
-  limpiar_estado_botones(4);
   ssn = 0;
 
-  if (cs[4] == false)
-  {
-    cs[4] = true;
-  }
-  
-  if (digitalRead(BotonAzul) == HIGH)
+  estadoPulsador[2] = digitalRead(BotonRojo);
+  if (!estadoPulsador[2] && anteriorPulsador[2] && millis() -db[2] >= 150UL)
   {
     Serial.println("Volvemos al menu automatico");
-    page = "automated";
-  }   
+    page = "Automatico";
+    db[2] = millis();
+  }
+  anteriorPulsador[2] = estadoPulsador[2];
+
+  estadoPulsador[1] = digitalRead(BotonAzul);
+  if (!estadoPulsador[1] && anteriorPulsador[1] && millis() -db[1] >= 150UL)
+  {
+    Serial.println("Pulsado boton de grabar movimientos");
+    page = "Grabar";
+    db[1] = millis();
+  }
+  anteriorPulsador[1] = estadoPulsador[1];
   
-  for (int i = 0; i < 5; i++)
+  for (int i = 0; i < (sizeof(servo1PosSave) / sizeof(int)); i++)
   {                    
     int j = i + 1;
 
-    if (digitalRead(BotonAzul) == HIGH)
+    estadoPulsador[2] = digitalRead(BotonRojo);
+    if (!estadoPulsador[2] && anteriorPulsador[2] && millis() -db[2] >= 150UL)
     {
-      Serial.println("Volvemos al menu atomatico");
-      page = "automated";
-    }        
+      Serial.println("Volvemos al menu automatico");
+      page = "Automatico";
+      db[2] = millis();
+    }
+    anteriorPulsador[2] = estadoPulsador[2];      
     
     if (servo1PosSave[i] < s1.read())
     {
