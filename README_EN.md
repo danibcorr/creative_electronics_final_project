@@ -11,7 +11,7 @@ Made by Clara Rubio Almagro, Laura Sánchez Sánchez and Daniel Bazo Correa, stu
 ## 🗺 Code diagram
 
 <p align="center">
-  <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Diagrams/Maquina_de_estados.jpg" width="500" />
+  <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Diagrams/Diagram_EN.png" width="500" />
 </p>
 
 ## ⭐️ License
