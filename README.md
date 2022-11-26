@@ -8,11 +8,10 @@ Repositorio para el seguimiento y control de versiones del proyecto a realizar e
 ## 👤 Contribuyentes
 Realizado por Clara Rubio Almagro, Laura Sánchez Sánchez y Daniel Bazo Correa, estudiantes de Grado en Ingeniería de Sistemas Electrónicos de la Universidad de Málaga.
 
-## 🗺 Diagrama del código
+## 🦾 Pasos
 
-<p align="center">
-  <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Diagrams/Diagram_SP.jpg" width="500" />
-</p>
+Los pasos realizados para la elaboración del proyecto se encuentran en este [enlace](https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico.md).
+
 
 ## ⭐️ Licencia
 [Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
