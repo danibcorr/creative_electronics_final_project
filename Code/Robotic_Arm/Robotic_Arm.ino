@@ -1,7 +1,10 @@
 // Librerías necesarias
 #include <Servo.h> 
+#include <LiquidCrystal.h>
 
-
+// Pines LCD
+const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 // Pines joystick
 #define j1x A8
@@ -21,10 +24,10 @@
 // Boton azul = automático
 // Boton rojo = atrás
 // Boton verde = ejecutar los movimientos grabados
-#define BotonAmarillo 2
-#define BotonAzul 3
-#define BotonRojo 4
-#define BotonVerde 5
+#define BotonAmarillo 8
+#define BotonAzul 9
+#define BotonRojo 10
+#define BotonVerde 13
 
 int show_one[] = {0, 0, 0, 0, 0};
 
@@ -57,7 +60,7 @@ int servo4PosSave[] = {90, 90, 90, 90, 90};
 
 
 void setup() 
-{
+{ 
   // Definir los pines de los servos
   s1.attach(servo_s1);
   s2.attach(servo_s2);
@@ -95,7 +98,8 @@ void loop()
     {
       show_one[1] = show_one[2] = show_one[3] = show_one[4] = 0;
       show_one[0] = 1;
-      Serial.println("Menu de inicio\n");
+      lcd.begin(16, 2);
+      lcd.print("Modo inicio");
     }
     
     chooseModePage();
@@ -106,7 +110,8 @@ void loop()
     {
       show_one[0] = show_one[2] = show_one[3] = show_one[4] = 0;
       show_one[1] = 1;
-      Serial.println("Modo Manual\n");
+      lcd.begin(16, 2);
+      lcd.print("Modo manual");
     }
     
     ManualModePage();
@@ -117,7 +122,8 @@ void loop()
     {
       show_one[0] = show_one[1] = show_one[3] = show_one[4] = 0;
       show_one[2] = 1;
-      Serial.println("Modo Automatico\n");
+      lcd.begin(16, 2);
+      lcd.print("Modo automatico");
     }
     
     AutomaticoModePage();
@@ -128,7 +134,8 @@ void loop()
     {
       show_one[0] = show_one[1] = show_one[2] = show_one[4] = 0;
       show_one[3] = 1;
-      Serial.println("Modo Grabar\n");
+      lcd.begin(16, 2);
+      lcd.print("Modo grabar");
     }
     
     GrabarPage();
@@ -139,7 +146,8 @@ void loop()
     {
       show_one[0] = show_one[1] = show_one[2] = show_one[3] = 0;
       show_one[4] = 1;
-      Serial.println("Modo Ejecutar\n");
+      lcd.begin(16, 2);
+      lcd.print("Modo ejecutar");
     }
     
     EjecutarPage();
@@ -154,7 +162,11 @@ void chooseModePage ()
   estadoPulsador[0] = digitalRead(BotonAmarillo);
   if (!estadoPulsador[0] && anteriorPulsador[0] && millis() - db[0] >= 150UL)
   {
-    Serial.println("Pulsado boton modo Manual");
+    lcd.begin(16, 2);
+    lcd.print("Pulsado boton");
+    lcd.setCursor(0, 1);
+    lcd.print("modo manual");
+    lcd.setCursor(0, 0);
     page = "Manual";
     db[0] = millis(); 
   }      
@@ -163,7 +175,11 @@ void chooseModePage ()
   estadoPulsador[1] = digitalRead(BotonAzul);
   if (!estadoPulsador[1] && anteriorPulsador[1] && millis() -db[1] >= 150UL)
   {
-    Serial.println("Pulsado boton modo automatico");
+    lcd.begin(16, 2);
+    lcd.print("Pulsado boton");
+    lcd.setCursor(0, 1);
+    lcd.print("modo automatico");
+    lcd.setCursor(0, 0);
     page = "Automatico";
     db[1] = millis();
   }
@@ -172,21 +188,16 @@ void chooseModePage ()
   
 void ManualModePage()
 {
-  // Mostramos los valores de los joystick por el puerto serie
-  Serial.print(analogRead(j1x));
-  Serial.print("\r\t");
-  Serial.print(analogRead(j2x));
-  Serial.print("\r\t");
-  Serial.print(analogRead(j1y));
-  Serial.print("\r\t");
-  Serial.println(analogRead(j2y));
-
   ssn = 0;
 
   estadoPulsador[2] = digitalRead(BotonRojo);
   if (!estadoPulsador[2] && anteriorPulsador[2] && millis() -db[2] >= 150UL)
   {
-    Serial.println("Pulsado boton atras, volvemos al menu de inicio");
+    lcd.begin(16, 2);
+    lcd.print("Pulsado boton");
+    lcd.setCursor(0, 1);
+    lcd.print("menu inicio");
+    lcd.setCursor(0, 0);
     page = "Inicio";
     db[2] = millis(); 
   }     
@@ -310,7 +321,11 @@ void AutomaticoModePage()
   estadoPulsador[1] = digitalRead(BotonAzul);
   if (!estadoPulsador[1] && anteriorPulsador[1] && millis() -db[1] >= 150UL)
   {
-    Serial.println("Pulsado boton de grabar movimientos");
+    lcd.begin(16, 2);
+    lcd.print("Pulsado boton");
+    lcd.setCursor(0, 1);
+    lcd.print("grabar movs.");
+    lcd.setCursor(0, 0);
     page = "Grabar";
     db[1] = millis();
   }
@@ -319,7 +334,11 @@ void AutomaticoModePage()
   estadoPulsador[2] = digitalRead(BotonRojo);
   if (!estadoPulsador[2] && anteriorPulsador[2] && millis() -db[2] >= 150UL)
   {
-    Serial.println("Pulsado boton atras, volvemos al menu");
+    lcd.begin(16, 2);
+    lcd.print("Pulsado boton");
+    lcd.setCursor(0, 1);
+    lcd.print("menu inicio");
+    lcd.setCursor(0, 0);
     page = "Inicio";
     db[2] = millis();
   }
@@ -328,7 +347,11 @@ void AutomaticoModePage()
   estadoPulsador[3] = digitalRead(BotonVerde);
   if (!estadoPulsador[3] && anteriorPulsador[3] && millis() -db[3] >= 150UL)
   {
-    Serial.println("Pulsado boton de ejecutar los movimientos grabados");
+    lcd.begin(16, 2);
+    lcd.print("Pulsado boton");
+    lcd.setCursor(0, 1);
+    lcd.print("ejecutar movs.");
+    lcd.setCursor(0, 0);
     page = "Ejecutar";
     db[3] = millis();
   }
@@ -340,7 +363,11 @@ void GrabarPage()
   estadoPulsador[2] = digitalRead(BotonRojo);
   if (!estadoPulsador[2] && anteriorPulsador[2] && millis() -db[2] >= 150UL)
   {
-    Serial.println("Volvemos al menu automatico");
+    lcd.begin(16, 2);
+    lcd.print("Pulsado boton");
+    lcd.setCursor(0, 1);
+    lcd.print("menu automatico");
+    lcd.setCursor(0, 0);
     page = "Automatico";
     db[2] = millis();
   }
@@ -349,7 +376,11 @@ void GrabarPage()
   estadoPulsador[3] = digitalRead(BotonVerde);
   if (!estadoPulsador[3] && anteriorPulsador[3] && millis() -db[3] >= 150UL)
   {
-    Serial.println("Pulsado boton de ejecutar los movimientos grabados");
+    lcd.begin(16, 2);
+    lcd.print("Pulsado boton");
+    lcd.setCursor(0, 1);
+    lcd.print("ejecutar movs.");
+    lcd.setCursor(0, 0);
     page = "Ejecutar";
     db[3] = millis();
   }
@@ -532,7 +563,11 @@ void EjecutarPage()
   estadoPulsador[2] = digitalRead(BotonRojo);
   if (!estadoPulsador[2] && anteriorPulsador[2] && millis() -db[2] >= 150UL)
   {
-    Serial.println("Volvemos al menu automatico");
+    lcd.begin(16, 2);
+    lcd.print("Pulsado boton");
+    lcd.setCursor(0, 1);
+    lcd.print("menu automatico");
+    lcd.setCursor(0, 0);
     page = "Automatico";
     db[2] = millis();
   }
@@ -541,7 +576,11 @@ void EjecutarPage()
   estadoPulsador[1] = digitalRead(BotonAzul);
   if (!estadoPulsador[1] && anteriorPulsador[1] && millis() -db[1] >= 150UL)
   {
-    Serial.println("Pulsado boton de grabar movimientos");
+    lcd.begin(16, 2);
+    lcd.print("Pulsado boton");
+    lcd.setCursor(0, 1);
+    lcd.print("grabar movs.");
+    lcd.setCursor(0, 0);
     page = "Grabar";
     db[1] = millis();
   }
@@ -554,7 +593,11 @@ void EjecutarPage()
     estadoPulsador[2] = digitalRead(BotonRojo);
     if (!estadoPulsador[2] && anteriorPulsador[2] && millis() -db[2] >= 150UL)
     {
-      Serial.println("Volvemos al menu automatico");
+      lcd.begin(16, 2);
+      lcd.print("Pulsado boton");
+      lcd.setCursor(0, 1);
+      lcd.print("menu automatico");
+      lcd.setCursor(0, 0);
       page = "Automatico";
       db[2] = millis();
     }
