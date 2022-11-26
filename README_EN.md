@@ -8,11 +8,9 @@ Repository for monitoring and version control of the project to be done in the s
 ## 👤 Contributors
 Made by Clara Rubio Almagro, Laura Sánchez Sánchez and Daniel Bazo Correa, students of Electronic Systems Engineering at the University of Málaga.
 
-## 🗺 Code diagram
+## 🦾 Steps
 
-<p align="center">
-  <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Diagrams/Diagram_EN.png" width="500" />
-</p>
+The steps carried out for the elaboration of the project can be found in this [link](https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/English/ROBOTIC%20ARM.md).
 
 ## ⭐️ License
 [Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
