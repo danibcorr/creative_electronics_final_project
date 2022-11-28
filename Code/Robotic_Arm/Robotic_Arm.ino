@@ -111,7 +111,7 @@ void loop()
       show_one[0] = show_one[2] = show_one[3] = show_one[4] = 0;
       show_one[1] = 1;
       lcd.begin(16, 2);
-      lcd.print("Modo manual")
+      lcd.print("Modo manual");
     }
     
     ManualModePage();
@@ -168,7 +168,7 @@ void chooseModePage ()
     lcd.print("modo manual");
     lcd.setCursor(0, 0);
     page = "Manual";
-    db[0] = millis()
+    db[0] = millis();
   }      
   anteriorPulsador[0] = estadoPulsador[0];
 
