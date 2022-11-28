@@ -24,10 +24,10 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 // Boton azul = automático
 // Boton rojo = atrás
 // Boton verde = ejecutar los movimientos grabados
-#define BotonAmarillo 2
-#define BotonAzul 3
-#define BotonRojo 4
-#define BotonVerde 5
+#define BotonAmarillo 36
+#define BotonAzul 38
+#define BotonRojo 40
+#define BotonVerde 42
 
 int show_one[] = {0, 0, 0, 0, 0};
 
