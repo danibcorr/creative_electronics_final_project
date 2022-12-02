@@ -36,7 +36,7 @@ Tras analizar el proyecto de partida nos hemos visto en la tesitura de tener que
 - También hemos diseñado nuestra nueva caja de control para que se adapte mejor a las modificaciones de la pantalla LCD y los botones.
 - En el brazo robótico hemos cambiado algunas piezas que no hemos encontrado en las tiendas. Por ello, hemos optado por realizar el diseñado e impresión en 3D. En concreto, las piezas impresas han sido las sustitutas de los dos tubos de latón en el proyecto de partida. El resto de piezas son las mismas que en el proyecto original.
 
-## 2.2. Módulo de botones
+### 2.1.1. Módulo de botones
 
 Hemos diseñado y soldado un módulo para los cuatro botones.
 
@@ -55,7 +55,9 @@ El resultado obtenido tras la soldadura fue el siguiente:
   <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico/image (4).png" width="300"/>
 </p>
 
-## 2.3. Construyendo el brazo
+Una vez soldado el módulo lo hemos probado con un sencillo [programa](https://github.com/danibcorr/creative_electronics_final_project/tree/main/Tests/prueba_botones).
+
+### 2.1.2. Construyendo el brazo
 
 En cuanto a la construcción del brazo, hemos seguido los mismos pasos que el [enlace](https://www.instructables.com/EEZYbotARM/). A modo de ilustración, enseñaremos algunas de las partes del proceso en el montaje del brazo robot con el fin de explicar cómo encajar las diferentes piezas del brazo.
 
@@ -68,15 +70,36 @@ En primer lugar, vamos a empezar por la base y la pinza, ya que en ellas irá si
 
 Posteriormente, hemos construido el codo del brazo añadiendo el otro servomotor encajandolo con la base y la pinza. Debido a la precisión de la impresora 3D utilizada, hemos lijado algunas piezas impresas. Sobre todo, los engranajes, ya que no encajaban bien con otras piezas.
 
-## 2.4. El código
+<p align="center">
+  <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico/image (7).jpg" width="300"/>
+</p>
 
-Nuestra recomendación es ir probando cada componente por separado. Por ello, en el caso de la pantalla LCD hemos utilizado el código proporcionado en el siguiente [enlace](https://docs.arduino.cc/learn/electronics/lcd-displays). En el caso de los servomotores, hemos optado por 
+### 2.1.3. Prueba de componentes
 
+Nuestra recomendación es ir probando cada componente por separado. Por ello, en el caso de la pantalla LCD hemos utilizado el código proporcionado en el siguiente [enlace](https://docs.arduino.cc/learn/electronics/lcd-displays) o podeis ver otro ejemplo [aquí](https://github.com/danibcorr/creative_electronics_final_project/tree/main/Tests/prueba_lcd). En el caso de los servomotores tenemos un código de ejemplo [aquí](https://github.com/danibcorr/creative_electronics_final_project/tree/main/Tests/prueba_servos) y finalmente para los botones [aquí](https://github.com/danibcorr/creative_electronics_final_project/tree/main/Tests/prueba_botones)
+
+Aunque las conexiones se muestren en el enlace proporcionado anteriormete, adjuntamos una imágen con las conexiones que hemos realizado en el caso del panel LCD empleando el código de prueba:
+
+<p align="center">
+  <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico/image (8).jpg" width="300"/>
+</p>
+
+En cuanto a los joystick, es importante conocer cuales son sus ejes junto con el rango de valores en el que se encuentra cada eje. Así conseguimos configurar el brazo robot para que se mueva en una zona restringida adquiriendo un mayor control sobre sus posiciones.
+
+<p align="center">
+  <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico/imagen (9).png" width="300"/>
+</p>
+
+## 2.2. Diseño e impresión de la caja de control
+
+Una vez que tenemos preparados todos los componentes que van a estar dentro de la caja de control, es el turno de diseñar la caja.
+
+## 2.5. El código
 
 La máquina de estados utilizada en la programación se muestra a continuación. Tiene 5 estados principales desde los que saltará según se pulsen los botones correspondientes. Con la intención de conocer el estado en el que nos encontramos y para ofrecer una interfaz más amigable, mostramos el estado actual a través de la pantalla LCD.
 
 <p align="center">
-  <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico/Diagram_SP.jpg" width="300"/>
+  <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico/Diagram_SP.jpg" width="500"/>
 </p>
 
 El brazo robótico puede estar en dos modos, manual o automático.
