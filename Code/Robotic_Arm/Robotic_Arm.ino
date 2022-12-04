@@ -29,7 +29,7 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 #define BotonRojo 40
 #define BotonVerde 42
 
-int show_one[] = {0, 0, 0, 0, 0};
+int show_once[] = {0, 0, 0, 0, 0};
 
 
 
@@ -67,10 +67,11 @@ void setup()
   s3.attach(servo_s3);    //pinza
   s4.attach(servo_s4);    //base
 
-  s1.write(90);
-  s2.write(0);
+  // Posicion Inicial de los motores
+  s1.write(45);
+  s2.write(180);
   s3.write(0);
-  s4.write(0);
+  s4.write(180);
 
   // Definir los pines de los joysticks como entrada
   pinMode(j1x, INPUT);
@@ -83,6 +84,9 @@ void setup()
   pinMode(BotonRojo, INPUT_PULLUP);
   pinMode(BotonVerde, INPUT_PULLUP);
 
+  // Inicializamos el LCD
+  lcd.begin(16, 2);
+  
   // Inicializaciamos la comunicación serie
   Serial.begin(9600);
   
@@ -94,11 +98,14 @@ void loop()
 {
   if (page == "Inicio")
   {
-    if (show_one[0] == 0)
+    if (show_once[0] == 0)
     {
-      show_one[1] = show_one[2] = show_one[3] = show_one[4] = 0;
-      show_one[0] = 1;
-      lcd.begin(16, 2);
+      show_once[0] = 1;
+      show_once[1] = 0;
+      show_once[2] = 0;
+      show_once[3] = 0;
+      show_once[4] = 0;
+      lcd.clear();
       lcd.print("Modo inicio");
     }
     
@@ -106,11 +113,14 @@ void loop()
   }
   else if (page == "Manual")
   {
-    if (show_one[1] == 0)
+    if (show_once[1] == 0)
     {
-      show_one[0] = show_one[2] = show_one[3] = show_one[4] = 0;
-      show_one[1] = 1;
-      lcd.begin(16, 2);
+      show_once[0] = 0;
+      show_once[1] = 1;
+      show_once[2] = 0;
+      show_once[3] = 0;
+      show_once[4] = 0;
+      lcd.clear();
       lcd.print("Modo manual");
     }
     
@@ -118,11 +128,14 @@ void loop()
   }
   else if (page == "Automatico")
   {
-    if (show_one[2] == 0)
+    if (show_once[2] == 0)
     {
-      show_one[0] = show_one[1] = show_one[3] = show_one[4] = 0;
-      show_one[2] = 1;
-      lcd.begin(16, 2);
+      show_once[0] = 0;
+      show_once[1] = 0;
+      show_once[2] = 1;
+      show_once[3] = 0;
+      show_once[4] = 0;
+      lcd.clear();
       lcd.print("Modo automatico");
     }
     
@@ -130,11 +143,14 @@ void loop()
   }
   else if (page == "Grabar")
   {
-    if (show_one[3] == 0)
+    if (show_once[3] == 0)
     {
-      show_one[0] = show_one[1] = show_one[2] = show_one[4] = 0;
-      show_one[3] = 1;
-      lcd.begin(16, 2);
+      show_once[0] = 0;
+      show_once[1] = 0;
+      show_once[2] = 0;
+      show_once[3] = 1;
+      show_once[4] = 0;
+      lcd.clear();
       lcd.print("Modo grabar");
     }
     
@@ -142,11 +158,14 @@ void loop()
   }
   else if (page == "Ejecutar")
   {
-    if (show_one[4] == 0)
+    if (show_once[4] == 0)
     {
-      show_one[0] = show_one[1] = show_one[2] = show_one[3] = 0;
-      show_one[4] = 1;
-      lcd.begin(16, 2);
+      show_once[0] = 0;
+      show_once[1] = 0;
+      show_once[2] = 0;
+      show_once[3] = 0;
+      show_once[4] = 1;
+      lcd.clear();
       lcd.print("Modo ejecutar");
     }
     
@@ -162,7 +181,7 @@ void chooseModePage ()
   estadoPulsador[0] = digitalRead(BotonAmarillo);
   if (!estadoPulsador[0] && anteriorPulsador[0] && millis() - db[0] >= 150UL)
   {
-    lcd.begin(16, 2);
+    lcd.clear();
     lcd.print("Pulsado boton");
     lcd.setCursor(0, 1);
     lcd.print("modo manual");
@@ -173,9 +192,9 @@ void chooseModePage ()
   anteriorPulsador[0] = estadoPulsador[0];
 
   estadoPulsador[1] = digitalRead(BotonAzul);
-  if (!estadoPulsador[1] && anteriorPulsador[1] && millis() -db[1] >= 150UL)
+  if (!estadoPulsador[1] && anteriorPulsador[1] && millis() - db[1] >= 150UL)
   {
-    lcd.begin(16, 2);
+    lcd.clear();
     lcd.print("Pulsado boton");
     lcd.setCursor(0, 1);
     lcd.print("modo automatico");
@@ -189,6 +208,7 @@ void chooseModePage ()
 void ManualModePage()
 {
   // Mostramos los valores de los joystick por el puerto serie
+  /*
   Serial.print(analogRead(j1x));
   Serial.print("\r\t");
   Serial.print(analogRead(j2x));
@@ -196,7 +216,8 @@ void ManualModePage()
   Serial.print(analogRead(j1y));
   Serial.print("\r\t");
   Serial.println(analogRead(j2y));
-
+  */
+  
   ssn = 0;
 
   estadoPulsador[2] = digitalRead(BotonRojo);
@@ -216,7 +237,7 @@ void ManualModePage()
 
   if (analogRead(j1x) >= 800)
   {
-    for (int i = s1.read(); i > 30; i--)
+    for (int i = s1.read(); i > 45 ; i--)
     {
       if (analogRead(j1x) < 800)
       {
@@ -229,7 +250,7 @@ void ManualModePage()
   }
   else if (analogRead(j1x) <= 300)
   {
-    for (int i = s1.read(); i < 90; i++)
+    for (int i = s1.read(); i < 150; i++)
     {
       if (analogRead(j1x) > 300)
       {
@@ -243,7 +264,7 @@ void ManualModePage()
 
   if (analogRead(j1y) >= 800)
   {
-    for (int i = s2.read(); i < 60; i++)
+    for (int i = s2.read(); i > 135; i--)
     {
       if (analogRead(j1y) < 800)
       {
@@ -256,7 +277,7 @@ void ManualModePage()
   }
   else if(analogRead(j1y) <= 300)
   {
-     for (int i = s2.read(); i > 0; i--)
+     for (int i = s2.read(); i < 180; i++)
      {
       if (analogRead(j1y) > 300)
       {
