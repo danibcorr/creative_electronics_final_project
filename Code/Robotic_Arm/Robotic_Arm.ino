@@ -13,10 +13,10 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 #define j2y A11
 
 // Pines servos
-#define servo_s1 22   //derecha
-#define servo_s2 24   //izquierda
-#define servo_s3 26   //pinza
-#define servo_s4 28   //base
+#define servo_s1 9   //derecha
+#define servo_s2 6   //izquierda
+#define servo_s3 10   //pinza
+#define servo_s4 13   //base
 
 // Pines Botones
 // Definir variables para los valores de los botones
