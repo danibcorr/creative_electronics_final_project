@@ -262,8 +262,7 @@ void ManualModePage()
     }
     else if (analogRead(j1y) <= 300)
     {
-        for (int i = s2.read(); (i < 180) || analogRead(j1y) > 300)
-            ; i++)
+        for (int i = s2.read(); (i < 180) || (analogRead(j1y) > 300); i++)
         {
             s2.write(i);
             delay(20);
@@ -466,8 +465,7 @@ void GrabarPage()
     }
     else if (analogRead(j1y) <= 300)
     {
-        for (int i = s2.read(); (i < 180) || analogRead(j1y) > 300)
-            ; i++)
+        for (int i = s2.read(); (i < 180) || (analogRead(j1y) > 300); i++)
         {
             s2.write(i);
             delay(20);
