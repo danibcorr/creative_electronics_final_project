@@ -2,7 +2,7 @@
 
 # 1. Resumen
 
-Este proyecto consiste en construir y programar un brazo robótico. Este, será capaz de realizar movimientos de manera manual mediante el control por joystick
+Este proyecto consiste en construir y programar un brazo robótico capaz de realizar movimientos de manera manual mediante el control por joystick
 y de repetir movimientos grabados, todo ello controlado por un Arduino Mega. El motivo principal del uso de la Arduino Mega es por su gran cantidad de pines de I/O
 además de tomas extras de GND y VCC.
 
@@ -97,6 +97,8 @@ En el caso de los motores, es importante colocar los pines de entrada de datos a
 <p align="center">
   <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico/image (10).png" width="300"/>
 </p>
+
+A la hora de probar los componentes juntos o de realizar el diseño final del proyecto, hay que tener en cuenta que son muchos elementos a conectar que requieren de alimentación. Con el fin de evitar los máximos fallos posibles deberemos tomar distintas copias de alimentación. En nuestro caso, la Arduino Mega ya cuenta con diferentes tomas de VCC por lo que no hemos conectado mas de 3-4 elementos por cada toma. Además, para evitar bucles de corriente, entre otros posibles problemas, se recomienta utilizar una única toma a tierra.
 
 ## 2.2. Diseño e impresión de la caja de control
 
