@@ -102,7 +102,7 @@ En el caso de los motores, es importante colocar los pines de entrada de datos a
 
 Una vez que tenemos preparados todos los componentes que van a estar dentro de la caja de control, es el turno de diseñar la caja.
 
-## 2.5. El código
+## 2.3. El código
 
 Partiendo del código del proyecto original nombrado al comienzo de este documento, hemos creado una máquina de estados. La máquina de estados utilizada en la programación se muestra a continuación. Tiene 5 estados principales desde los que saltará según se pulsen los botones correspondientes. Con la intención de conocer el estado en el que nos encontramos y para ofrecer una interfaz más amigable, mostramos el estado actual a través de la pantalla LCD.
 
