@@ -74,6 +74,8 @@ Posteriormente, hemos construido el codo del brazo añadiendo el otro servomotor
   <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico/image (7).jpg" width="300"/>
 </p>
 
+Para que las tuercas tuvieran la ólgura suficiente para moverse sin provocar roces (facilitando el trabajo de los motores) hemos colocado una gomas/elásticos en el final de cada tornillo, así conseguimos que la tuerca se quede fija en su sitio. Valdría colocar cualquier tuerca con algún recubrimiento de silicona que evitase su desplazamiento, o colocar teflón o algún componente similar.
+
 ### 2.1.3. Prueba de componentes
 
 Nuestra recomendación es ir probando cada componente por separado. Por ello, en el caso de la pantalla LCD hemos utilizado el código proporcionado en el siguiente [enlace](https://docs.arduino.cc/learn/electronics/lcd-displays) o podeis ver otro ejemplo [aquí](https://github.com/danibcorr/creative_electronics_final_project/tree/main/Tests/prueba_lcd). En el caso de los servomotores tenemos un código de ejemplo [aquí](https://github.com/danibcorr/creative_electronics_final_project/tree/main/Tests/prueba_servos) y finalmente para los botones [aquí](https://github.com/danibcorr/creative_electronics_final_project/tree/main/Tests/prueba_botones)
@@ -90,13 +92,19 @@ En cuanto a los joystick, es importante conocer cuales son sus ejes junto con el
   <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico/imagen (9).png" width="300"/>
 </p>
 
+En el caso de los motores, es importante colocar los pines de entrada de datos a entradas del microcontrolador que soporten PWM para su movimiento. Existen 2 tipos de motores, los que tienen un ángulo de giro de 180 grados y los que tienen 360 grados. En nuestro caso, los motores empleados han sido los MG90S que son motores de 360 grados. El principal problema que existe con este tipo de motores es que no podremos conocer su posición. Por ello, inicialmente hemos colocado el brazo robot en una determinada posición en las que supieramos el ángulo al que se encontrarían los motores para posteriormente establecer un rango de valores posible de giro (grados de libertad) para cada servomotor. 
+
+<p align="center">
+  <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico/image (10).png" width="300"/>
+</p>
+
 ## 2.2. Diseño e impresión de la caja de control
 
 Una vez que tenemos preparados todos los componentes que van a estar dentro de la caja de control, es el turno de diseñar la caja.
 
 ## 2.5. El código
 
-La máquina de estados utilizada en la programación se muestra a continuación. Tiene 5 estados principales desde los que saltará según se pulsen los botones correspondientes. Con la intención de conocer el estado en el que nos encontramos y para ofrecer una interfaz más amigable, mostramos el estado actual a través de la pantalla LCD.
+Partiendo del código del proyecto original nombrado al comienzo de este documento, hemos creado una máquina de estados. La máquina de estados utilizada en la programación se muestra a continuación. Tiene 5 estados principales desde los que saltará según se pulsen los botones correspondientes. Con la intención de conocer el estado en el que nos encontramos y para ofrecer una interfaz más amigable, mostramos el estado actual a través de la pantalla LCD.
 
 <p align="center">
   <img src="https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico/Diagram_SP.jpg" width="500"/>
