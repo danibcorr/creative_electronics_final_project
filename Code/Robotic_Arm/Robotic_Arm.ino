@@ -68,7 +68,7 @@ void setup()
     s4.attach(servo_s4); // base
 
     // Posicion Inicial de los motores
-    s1.write(45);
+    s1.write(110);
     s2.write(180);
     s3.write(0);
     s4.write(180);
@@ -237,7 +237,7 @@ void ManualModePage()
 
     if (analogRead(j1x) >= 800)
     {
-        for (int i = s1.read(); (i > 45) || (analogRead(j1x) < 800); i--)
+        for (int i = s1.read(); (i > 0) || (analogRead(j1x) < 800); i--)
         {
             s1.write(i);
             delay(20);
@@ -245,7 +245,7 @@ void ManualModePage()
     }
     else if (analogRead(j1x) <= 300)
     {
-        for (int i = s1.read(); (i < 150) || (analogRead(j1x) > 300); i++)
+        for (int i = s1.read(); (i < 110) || (analogRead(j1x) > 300); i++)
         {
             s1.write(i);
             delay(20);
