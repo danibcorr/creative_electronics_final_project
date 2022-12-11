@@ -279,7 +279,7 @@ void ManualModePage()
     }
     else if (analogRead(j2x) <= 300)
     {
-        for (int i = s4.read(); (i > 0) || (analogRead(j2x) > 300); i--)
+        for (int i = s4.read(); (i > 100) || (analogRead(j2x) > 300); i--)
         {
             s4.write(i);
             delay(30);
