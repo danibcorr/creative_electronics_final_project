@@ -141,7 +141,7 @@ void loop()
 
         AutomaticoModePage();
     }
-    else if (page == "Party")
+    else if (page == "Grabar")
     {
         if (show_once[3] == 0)
         {
@@ -151,10 +151,25 @@ void loop()
             show_once[3] = 1;
             show_once[4] = 0;
             lcd.clear();
-            lcd.print("Modo fiesta");
+            lcd.print("Modo grabar");
         }
 
-        PartyPage();
+        PartyModePage();
+    }
+    else if (page == "Ejecutar")
+    {
+        if (show_once[4] == 0)
+        {
+            show_once[0] = 0;
+            show_once[1] = 0;
+            show_once[2] = 0;
+            show_once[3] = 0;
+            show_once[4] = 1;
+            lcd.clear();
+            lcd.print("Modo ejecutar");
+        }
+
+        EjecutarPage();
     }
 }
 
@@ -191,6 +206,17 @@ void chooseModePage()
 
 void ManualModePage()
 {
+    // Mostramos los valores de los joystick por el puerto serie
+    /*
+    Serial.print(analogRead(j1x));
+    Serial.print("\r\t");
+    Serial.print(analogRead(j2x));
+    Serial.print("\r\t");
+    Serial.print(analogRead(j1y));
+    Serial.print("\r\t");
+    Serial.println(analogRead(j2y));
+    */
+
     ssn = 0;
 
     estadoPulsador[2] = digitalRead(BotonRojo);
@@ -296,26 +322,107 @@ void ManualModePage()
 
 void AutomaticoModePage()
 {
-    ssn = 0;
-
-    estadoPulsador[2] = digitalRead(BotonRojo);
-    if (!estadoPulsador[2] && anteriorPulsador[2] && millis() - db[2] >= 150UL)
-    {
-        lcd.clear();
-        lcd.begin(16, 2);
-        lcd.print("Pulsado boton");
-        lcd.setCursor(0, 1);
-        lcd.print("menu inicio");
-        lcd.setCursor(0, 0);
-        page = "Inicio";
-        db[2] = millis();
-    }
-    anteriorPulsador[2] = estadoPulsador[2];
+  for (pos3 = 110; pos3 >= 0; pos3 -= 1) 
+   {
+      s1.write(pos3);              
+      delay(15);                       
+   }
+   delay(1000);
+   for (pos4 = 135; pos4 <= 180; pos4 += 1) 
+   {
+      s2.write(pos4);              
+      delay(50);                       
+   }
+   delay(1000);
+   for (pos1 = 0; pos1 <= 90; pos1 += 1) 
+   {
+      s3.write(pos1);              
+      delay(15);                       
+   }
+   delay(1000);
+   for (pos1 = 90; pos1 >= 0; pos1 -= 1) 
+   {
+      s3.write(pos1);              
+      delay(15);                       
+   }
+   delay(1000);
+   for (pos4 = 180; pos3 >= 135; pos4 -= 1) 
+   {
+      s2.write(pos4);              
+      delay(50);                       
+   }
+   delay(1000);
+   for (pos3 = 0; pos3 <= 110; pos3 += 1) 
+   {
+      s1.write(pos3);              
+      delay(15);                       
+   }
+   delay(1000);
+   
+    
 }
 
-void PartyPage()
+void PartyModePage()
 {
-    estadoPulsador[2] = digitalRead(BotonRojo);
+  for (pos2 = 100; pos2 <= 180; pos2 += 1) 
+   {
+      s4.write(pos2);              
+      delay(15);                       
+   }
+   for (pos1 = 0; pos1 <= 90; pos1 += 1) 
+   {
+      s3.write(pos1);              
+      delay(15);                       
+   }
+   delay(100);
+   for (pos1 = 90; pos1 >= 0; pos1 -= 1) 
+   {
+      s3.write(pos1);              
+      delay(15);                       
+   }
+   delay(100);
+   for (pos1 = 0; pos1 <= 90; pos1 += 1) 
+   {
+      s3.write(pos1);              
+      delay(15);                       
+   }
+   delay(100);
+   for (pos1 = 90; pos1 >= 0; pos1 -= 1) 
+   {
+      s3.write(pos1);              
+      delay(15);                       
+   }
+   delay(100);
+   for (pos2 = 180; pos2 >= 100; pos2 -= 1) 
+   {
+      s4.write(pos2);              
+      delay(15);                       
+   }
+   for (pos1 = 0; pos1 <= 90; pos1 += 1) 
+   {
+      s3.write(pos1);              
+      delay(15);                       
+   }
+   delay(100);
+   for (pos1 = 90; pos1 >= 0; pos1 -= 1) 
+   {
+      s3.write(pos1);              
+      delay(15);                       
+   }
+   delay(100);
+   for (pos1 = 0; pos1 <= 90; pos1 += 1) 
+   {
+      s3.write(pos1);              
+      delay(15);                       
+   }
+   delay(100);
+   for (pos1 = 90; pos1 >= 0; pos1 -= 1) 
+   {
+      s3.write(pos1);              
+      delay(15);                       
+   }
+   
+    /*estadoPulsador[2] = digitalRead(BotonRojo);
     if (!estadoPulsador[2] && anteriorPulsador[2] && millis() - db[2] >= 150UL)
     {
         lcd.clear();
@@ -465,6 +572,130 @@ void PartyPage()
         {
             s3.write(i);
             delay(20);
+        }
+    }*/
+}
+
+void EjecutarPage()
+{
+    ssn = 0;
+
+    estadoPulsador[2] = digitalRead(BotonRojo);
+    if (!estadoPulsador[2] && anteriorPulsador[2] && millis() - db[2] >= 150UL)
+    {
+        lcd.clear();
+        lcd.begin(16, 2);
+        lcd.print("Pulsado boton");
+        lcd.setCursor(0, 1);
+        lcd.print("menu automatico");
+        lcd.setCursor(0, 0);
+        page = "Automatico";
+        db[2] = millis();
+    }
+    anteriorPulsador[2] = estadoPulsador[2];
+
+    estadoPulsador[1] = digitalRead(BotonAzul);
+    if (!estadoPulsador[1] && anteriorPulsador[1] && millis() - db[1] >= 150UL)
+    {
+        lcd.clear();
+        lcd.begin(16, 2);
+        lcd.print("Pulsado boton");
+        lcd.setCursor(0, 1);
+        lcd.print("grabar movs.");
+        lcd.setCursor(0, 0);
+        page = "Grabar";
+        db[1] = millis();
+    }
+    anteriorPulsador[1] = estadoPulsador[1];
+
+    for (int i = 0; i < (sizeof(servo1PosSave) / sizeof(int)); i++)
+    {
+        int j = i + 1;
+
+        estadoPulsador[2] = digitalRead(BotonRojo);
+        if (!estadoPulsador[2] && anteriorPulsador[2] && millis() - db[2] >= 150UL)
+        {
+            lcd.clear();
+            lcd.begin(16, 2);
+            lcd.print("Pulsado boton");
+            lcd.setCursor(0, 1);
+            lcd.print("menu automatico");
+            lcd.setCursor(0, 0);
+            page = "Automatico";
+            db[2] = millis();
+        }
+        anteriorPulsador[2] = estadoPulsador[2];
+
+        if (servo1PosSave[i] < s1.read())
+        {
+            for (int p = s1.read(); p >= servo1PosSave[i]; p--)
+            {
+                s1.write(p);
+                delay(20);
+            }
+        }
+
+        if (servo1PosSave[i] > s1.read())
+        {
+            for (int p = s1.read(); p <= servo1PosSave[i]; p++)
+            {
+                s1.write(p);
+                delay(20);
+            }
+        }
+
+        if (servo2PosSave[i] < s2.read())
+        {
+            for (int p = s2.read(); p >= servo2PosSave[i]; p--)
+            {
+                s2.write(p);
+                delay(20);
+            }
+        }
+
+        if (servo2PosSave[i] > s2.read())
+        {
+            for (int p = s2.read(); p <= servo2PosSave[i]; p++)
+            {
+                s2.write(p);
+                delay(20);
+            }
+        }
+
+        if (servo3PosSave[i] < s3.read())
+        {
+            for (int p = s3.read(); p >= servo3PosSave[i]; p--)
+            {
+                s3.write(p);
+                delay(20);
+            }
+        }
+
+        if (servo3PosSave[i] > s3.read())
+        {
+            for (int p = s3.read(); p <= servo3PosSave[i]; p++)
+            {
+                s3.write(p);
+                delay(20);
+            }
+        }
+
+        if (servo4PosSave[i] < s4.read())
+        {
+            for (int p = s4.read(); p >= servo4PosSave[i]; p--)
+            {
+                s4.write(p);
+                delay(20);
+            }
+        }
+
+        if (servo4PosSave[i] > s4.read())
+        {
+            for (int p = s4.read(); p <= servo4PosSave[i]; p++)
+            {
+                s4.write(p);
+                delay(20);
+            }
         }
     }
 }
