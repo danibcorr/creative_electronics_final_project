@@ -237,70 +237,86 @@ void ManualModePage()
 
     if (analogRead(j1x) >= 800)
     {
-        for (int i = s1.read(); (i > 0) || (analogRead(j1x) < 800); i--)
-        {
-            s1.write(i);
-            delay(20);
+        for (int i = s1.read(); i < 110; i++){
+        if (analogRead(j1x) < 800){
+          break;
         }
+        s1.write(i);
+        delay(20);
+       }
     }
     else if (analogRead(j1x) <= 300)
     {
-        for (int i = s1.read(); (i < 110) || (analogRead(j1x) > 300); i++)
-        {
-            s1.write(i);
-            delay(20);
+        for (int i = s1.read(); i > 0; i--){
+        if (analogRead(j1x) > 300){
+          break;
         }
+        s1.write(i);
+        delay(20);
+       }
     }
 
     if (analogRead(j1y) >= 800)
     {
-        for (int i = s2.read(); (i > 135) || (analogRead(j1y) < 800); i--)
-        {
-            s2.write(i);
-            delay(20);
+        for (int i = s2.read(); i < 180; i++){
+        if (analogRead(j1y) < 800){
+          break;
         }
+        s2.write(i);
+        delay(20);
+       }
     }
     else if (analogRead(j1y) <= 300)
     {
-        for (int i = s2.read(); (i < 180) || (analogRead(j1y) > 300); i++)
-        {
-            s2.write(i);
-            delay(20);
+        for (int i = s2.read(); i > 135; i--){
+        if (analogRead(j1y) > 300){
+          break;
         }
+        s2.write(i);
+        delay(20);
+       }
     }
 
     if (analogRead(j2x) >= 800)
     {
-        for (int i = s4.read(); (i < 180) || (analogRead(j2x) < 800); i++)
-        {
-            s4.write(i);
-            delay(30);
+        for (int i = s4.read(); i < 180; i++){
+        if (analogRead(j2x) < 800){
+          break;
         }
+        s4.write(i);
+        delay(30);
+       }
     }
     else if (analogRead(j2x) <= 300)
     {
-        for (int i = s4.read(); (i > 100) || (analogRead(j2x) > 300); i--)
-        {
-            s4.write(i);
-            delay(30);
+        for (int i = s4.read(); i > 100; i--){
+        if (analogRead(j2x) > 300){
+          break;
         }
+        s4.write(i);
+        delay(30);
+       }
     }
 
     if (analogRead(j2y) >= 800)
     {
-        for (int i = s3.read(); (i < 90) || (analogRead(j2y) < 800); i++)
-        {
-            s3.write(i);
-            delay(20);
+        for (int i = s3.read(); i < 90; i++){
+        if (analogRead(j2y) < 800){
+          break;
         }
+        s3.write(i);
+        delay(20);
+       }
     }
     else if (analogRead(j2y) <= 300)
     {
-        for (int i = s3.read(); (i > 0) || (analogRead(j2y) > 300); i--)
-        {
-            s3.write(i);
-            delay(20);
+        for (int i = s3.read(); i > 0; i--){
+        if (analogRead(j2y) > 300){
+          break;
         }
+        s3.write(i);
+        delay(20);
+       }
     }
 }
 
