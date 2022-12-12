@@ -184,6 +184,19 @@ void chooseModePage()
         db[1] = millis();
     }
     anteriorPulsador[1] = estadoPulsador[1];
+    
+    estadoPulsador[3] = digitalRead(BotonVerde);
+    if (!estadoPulsador[3] && anteriorPulsador[3] && millis() - db[3] >= 150UL)
+    {
+        lcd.clear();
+        lcd.print("Pulsado boton");
+        lcd.setCursor(0, 1);
+        lcd.print("modo party");
+        lcd.setCursor(0, 0);
+        page = "Party";
+        db[3] = millis();
+    }
+    anteriorPulsador[3] = estadoPulsador[3];
 }
 
 void ManualModePage()
