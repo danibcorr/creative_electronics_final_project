@@ -12,6 +12,8 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 #define j2x A10
 #define j2y A11
 
+int pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
 // Pines servos
 // Los pines de los servos se deben conectar a puertos que soporten PWM
 // En el caso de la Arduino Mega, tenemos 15 salidas PWM de 8bis en los pines 2 a 13 y 44 a 46
