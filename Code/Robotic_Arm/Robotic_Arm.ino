@@ -35,7 +35,7 @@ int pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
 // Vector para mostrar una única vez el mensaje con el menu de inicio
 // Así no estamos constantemen actualizando el valor por pantalla
-int show_once[] = {0, 0, 0, 0, 0};
+int show_once[] = {0, 0, 0, 0};
 
 // Definición de variables globales
 // Variable de página
@@ -48,15 +48,6 @@ unsigned long db[4];
 
 // Definición de los servos
 Servo s1, s2, s3, s4;
-
-//  TODO: Valores joystick, no se está usando
-int x_out = 0, y_out = 0, x_out2 = 0, y_out2 = 0;
-
-// define int variable array for saved position of the servos
-int servo1PosSave[] = {90, 90, 90, 90, 90};
-int servo2PosSave[] = {90, 90, 90, 90, 90};
-int servo3PosSave[] = {90, 90, 90, 90, 90};
-int servo4PosSave[] = {90, 90, 90, 90, 90};
 
 void setup()
 {
@@ -103,7 +94,6 @@ void loop()
             show_once[1] = 0;
             show_once[2] = 0;
             show_once[3] = 0;
-            show_once[4] = 0;
             lcd.clear();
             lcd.print("Modo inicio");
         }
@@ -118,7 +108,6 @@ void loop()
             show_once[1] = 1;
             show_once[2] = 0;
             show_once[3] = 0;
-            show_once[4] = 0;
             lcd.clear();
             lcd.print("Modo manual");
         }
@@ -133,7 +122,6 @@ void loop()
             show_once[1] = 0;
             show_once[2] = 1;
             show_once[3] = 0;
-            show_once[4] = 0;
             lcd.clear();
             lcd.print("Modo automatico");
         }
@@ -148,7 +136,6 @@ void loop()
             show_once[1] = 0;
             show_once[2] = 0;
             show_once[3] = 1;
-            show_once[4] = 0;
             lcd.clear();
             lcd.print("Modo party");
         }
