@@ -49,6 +49,23 @@ unsigned long db[4];
 // Definición de los servos
 Servo s1, s2, s3, s4;
 
+void volver_Inicio()
+{
+    estadoPulsador[2] = digitalRead(BotonRojo);
+    if (!estadoPulsador[2] && anteriorPulsador[2] && millis() - db[2] >= 150UL)
+    {
+        lcd.clear();
+        lcd.begin(16, 2);
+        lcd.print("Pulsado boton");
+        lcd.setCursor(0, 1);
+        lcd.print("menu inicio");
+        lcd.setCursor(0, 0);
+        page = "Inicio";
+        db[2] = millis();
+    }
+    anteriorPulsador[2] = estadoPulsador[2];
+}
+
 void setup()
 {
     // Definir los pines de los servos
@@ -188,19 +205,7 @@ void chooseModePage()
 
 void ManualModePage()
 {
-    estadoPulsador[2] = digitalRead(BotonRojo);
-    if (!estadoPulsador[2] && anteriorPulsador[2] && millis() - db[2] >= 150UL)
-    {
-        lcd.clear();
-        lcd.begin(16, 2);
-        lcd.print("Pulsado boton");
-        lcd.setCursor(0, 1);
-        lcd.print("menu inicio");
-        lcd.setCursor(0, 0);
-        page = "Inicio";
-        db[2] = millis();
-    }
-    anteriorPulsador[2] = estadoPulsador[2];
+    volver_Inicio();
 
     //-------------------------------Manual Joystick Control-------------------------------------------------------------------------------------------------------------
 
@@ -315,57 +320,51 @@ void ManualModePage()
 
 void AutomaticoModePage()
 {
-    estadoPulsador[2] = digitalRead(BotonRojo);
-    if (!estadoPulsador[2] && anteriorPulsador[2] && millis() - db[2] >= 150UL)
-    {
-        lcd.clear();
-        lcd.begin(16, 2);
-        lcd.print("Pulsado boton");
-        lcd.setCursor(0, 1);
-        lcd.print("menu inicio");
-        lcd.setCursor(0, 0);
-        page = "Inicio";
-        db[2] = millis();    
-    }
-    anteriorPulsador[2] = estadoPulsador[2];
+    volver_Inicio();
     
-    for (pos3 = 110; pos3 >= 0; pos3 -= 1) 
+    for (pos3 = 110; (pos3 >= 0) && (page == "Automatico"); pos3 -= 1) 
     {
+        volver_Inicio();
         s1.write(pos3);              
         delay(15);                       
     }
     delay(1000);
     
-    for (pos4 = 135; pos4 <= 180; pos4 += 1) 
+    for (pos4 = 135; (pos4 <= 180) && (page == "Automatico"); pos4 += 1) 
     {
+        volver_Inicio();
         s2.write(pos4);              
         delay(50);                       
     }
     delay(1000);
     
-    for (pos1 = 0; pos1 <= 90; pos1 += 1) 
+    for (pos1 = 0; (pos1 <= 90)  && (page == "Automatico"); pos1 += 1) 
     {
+        volver_Inicio();
         s3.write(pos1);              
         delay(15);                       
     }
     delay(1000);
     
-    for (pos1 = 90; pos1 >= 0; pos1 -= 1) 
+    for (pos1 = 90; (pos1 >= 0)  && (page == "Automatico"); pos1 -= 1) 
     {
+        volver_Inicio();
         s3.write(pos1);              
         delay(15);                       
     }
     delay(1000);
     
-    for (pos4 = 180; pos3 >= 135; pos4 -= 1) 
+    for (pos4 = 180; (pos3 >= 135) && (page == "Automatico"); pos4 -= 1) 
     {
+        volver_Inicio();
         s2.write(pos4);              
         delay(50);                       
     }
     delay(1000);
     
-    for (pos3 = 0; pos3 <= 110; pos3 += 1) 
+    for (pos3 = 0; (pos3 <= 110)  && (page == "Automatico"); pos3 += 1) 
     {
+        volver_Inicio();
         s1.write(pos3);              
         delay(15);                       
     }
@@ -374,83 +373,81 @@ void AutomaticoModePage()
 
 void PartyModePage()
 {
-    estadoPulsador[2] = digitalRead(BotonRojo);
-    if (!estadoPulsador[2] && anteriorPulsador[2] && millis() - db[2] >= 150UL)
-    {
-        lcd.clear();
-        lcd.begin(16, 2);
-        lcd.print("Pulsado boton");
-        lcd.setCursor(0, 1);
-        lcd.print("menu inicio");
-        lcd.setCursor(0, 0);
-        page = "Inicio";
-        db[2] = millis();    
-    }
-    anteriorPulsador[2] = estadoPulsador[2];
+    volver_Inicio();
     
-    for (pos2 = 100; pos2 <= 180; pos2 += 1) 
+    for (pos2 = 100; (pos2 <= 180) && (page == "Party"); pos2 += 1) 
     {
+        volver_Inicio();
         s4.write(pos2);              
         delay(15);                       
     }
     
-    for (pos1 = 0; pos1 <= 90; pos1 += 1) 
+    for (pos1 = 0; (pos1 <= 90)  && (page == "Party"); pos1 += 1) 
     {
+        volver_Inicio();
         s3.write(pos1);              
         delay(15);                       
     }
     delay(100);
     
-    for (pos1 = 90; pos1 >= 0; pos1 -= 1) 
+    for (pos1 = 90; (pos1 >= 0) && (page == "Party"); pos1 -= 1) 
     {
+        volver_Inicio();
         s3.write(pos1);              
         delay(15);                       
     }
     delay(100);
     
-    for (pos1 = 0; pos1 <= 90; pos1 += 1) 
+    for (pos1 = 0; (pos1 <= 90) && (page == "Party"); pos1 += 1) 
     {
+        volver_Inicio();
         s3.write(pos1);              
         delay(15);                       
     }
     delay(100);
     
-    for (pos1 = 90; pos1 >= 0; pos1 -= 1) 
+    for (pos1 = 90; (pos1 >= 0) && (page == "Party"); pos1 -= 1) 
     {
+        volver_Inicio();
         s3.write(pos1);              
         delay(15);                       
     }
     delay(100);
     
-    for (pos2 = 180; pos2 >= 100; pos2 -= 1) 
+    for (pos2 = 180; (pos2 >= 100) && (page == "Party"); pos2 -= 1) 
     {
+        volver_Inicio();
         s4.write(pos2);              
         delay(15);                       
     }
     
-    for (pos1 = 0; pos1 <= 90; pos1 += 1) 
+    for (pos1 = 0; (pos1 <= 90) && (page == "Party"); pos1 += 1) 
     {
+        volver_Inicio();
         s3.write(pos1);              
         delay(15);                       
     }
     delay(100);
     
-    for (pos1 = 90; pos1 >= 0; pos1 -= 1) 
+    for (pos1 = 90; (pos1 >= 0) && (page == "Party"); pos1 -= 1) 
     {
+        volver_Inicio();
         s3.write(pos1);              
         delay(15);                       
     }
     delay(100);
     
-    for (pos1 = 0; pos1 <= 90; pos1 += 1) 
+    for (pos1 = 0; (pos1 <= 90) && (page == "Party"); pos1 += 1) 
     {
+        volver_Inicio();
         s3.write(pos1);              
         delay(15);                       
     }
     delay(100);
     
-    for (pos1 = 90; pos1 >= 0; pos1 -= 1) 
+    for (pos1 = 90; (pos1 >= 0) && (page == "Party"); pos1 -= 1) 
     {
+        volver_Inicio();
         s3.write(pos1);              
         delay(15);                       
     }
