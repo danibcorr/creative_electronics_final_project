@@ -15,4 +15,4 @@ The main idea can be found in this [link](https://www.instructables.com/Automate
 The steps carried out for the elaboration of the project can be found in this [link](https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/English/ROBOTIC%20ARM.md).
 
 ## ⭐️ License
-[Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
+[Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)](https://creativecommons.org/licenses/by-nc-sa/3.0/)
