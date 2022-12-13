@@ -17,4 +17,4 @@ Los pasos realizados para la elaboración del proyecto se encuentran en este
 
 
 ## ⭐️ Licencia
-[Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
+[Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)](https://creativecommons.org/licenses/by-nc-sa/3.0/)
