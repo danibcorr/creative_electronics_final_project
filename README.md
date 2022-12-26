@@ -13,7 +13,7 @@ La idea principal se pueden encontrar en este [enlace](https://www.instructables
 ## 🦾 Pasos
 
 Los pasos realizados para la elaboración del proyecto se encuentran en este 
-[enlace](https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/Espa%C3%B1ol/Brazo%20Robo%CC%81tico.md).
+[enlace](https://www.instructables.com/Robotic-Arm-Ft-Arduino-Mega-TheGHIZmo-Aarav-G/).
 
 
 ## ⭐️ Licencia
