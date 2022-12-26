@@ -8,7 +8,7 @@ En este repositorio se reúnen todos los documentos y códigos necesarios para l
 ## 👤 Contribuyentes
 
 Realizado por Clara Rubio Almagro, Laura Sánchez Sánchez y Daniel Bazo Correa, estudiantes de Grado en Ingeniería de Sistemas Electrónicos de la Universidad de Málaga.
-La idea principal se pueden encontrar en este [enlace](https://www.instructables.com/Automated-Robotic-Arm-That-Learns-Ft-Tinkercad-Ard/).
+La idea principal se puede encontrar en este [enlace](https://www.instructables.com/Automated-Robotic-Arm-That-Learns-Ft-Tinkercad-Ard/).
 
 ## 🦾 Pasos
 
