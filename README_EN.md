@@ -12,7 +12,7 @@ The main idea can be found in this [link](https://www.instructables.com/Automate
 
 ## 🦾 Steps
 
-The steps performed for the elaboration of the project can be found in this. 
+The steps performed for the elaboration of the project can be found in this
 [link](https://www.instructables.com/Robotic-Arm-Ft-Arduino-Mega-TheGHIZmo-Aarav-G/).
 
 ## ⭐️ License.
