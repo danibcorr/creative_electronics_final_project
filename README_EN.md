@@ -12,7 +12,7 @@ The main idea can be found in this [link](https://www.instructables.com/Automate
 
 ## 🦾 Steps
 
-The steps carried out for the elaboration of the project can be found in this [link](https://github.com/danibcorr/creative_electronics_final_project/blob/main/Steps/English/ROBOTIC%20ARM.md).
+The steps carried out for the elaboration of the project can be found in this [link](https://www.instructables.com/Robotic-Arm-Ft-Arduino-Mega-TheGHIZmo-Aarav-G/).
 
 ## ⭐️ License
 [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
